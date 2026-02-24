@@ -55,25 +55,27 @@ class _MyHomePageState extends State<MyHomePage> {
         //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         //   title: Text(widget.title),
         // ),
-        body: WebViewWidget(
-          controller: WebViewController()
-            ..setJavaScriptMode(JavaScriptMode.unrestricted)
-            ..setNavigationDelegate(
-              NavigationDelegate(
-                onProgress: (int progress) {},
-                onPageStarted: (String url) {},
-                onPageFinished: (String url) {},
-                onHttpError: (HttpResponseError error) {},
-                onWebResourceError: (WebResourceError error) {},
-                onNavigationRequest: (NavigationRequest request) {
-                  if (request.url.startsWith('https://www.youtube.com/')) {
-                    return NavigationDecision.prevent;
-                  }
-                  return NavigationDecision.navigate;
-                },
-              ),
-            )
-            ..loadRequest(Uri.parse('https://elearning.nim.net.id/')),
+        body: SafeArea(
+          child: WebViewWidget(
+            controller: WebViewController()
+              ..setJavaScriptMode(JavaScriptMode.unrestricted)
+              ..setNavigationDelegate(
+                NavigationDelegate(
+                  onProgress: (int progress) {},
+                  onPageStarted: (String url) {},
+                  onPageFinished: (String url) {},
+                  onHttpError: (HttpResponseError error) {},
+                  onWebResourceError: (WebResourceError error) {},
+                  onNavigationRequest: (NavigationRequest request) {
+                    if (request.url.startsWith('https://www.youtube.com/')) {
+                      return NavigationDecision.prevent;
+                    }
+                    return NavigationDecision.navigate;
+                  },
+                ),
+              )
+              ..loadRequest(Uri.parse('https://elearning.nim.net.id/')),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => exit(0),
