@@ -1,4 +1,4 @@
-package com.example.examp_app
+package com.nimnet.examp_app
 
 import android.app.ActivityManager
 import android.app.Activity
